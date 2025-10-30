@@ -44,26 +44,12 @@
     </style>
 </head>
 <body>
-    <button onclick="createPopups()">生成思念弹窗</button>
+    <button onclick="createPopups()">生成弹窗</button>
 
     <script>
         // 温馨提示内容
         const tips = [
-            "每天都要元气满满",
-            "保持微笑呀",
-            "好好爱自己",
-            "我想你了",
-            "今天过得开心嘛",
-            "期待下一次见面",
-            "别熬夜",
-            "早点休息",
-            "天冷了，多穿衣服",
-            "多喝水哦~",
-            "梦想成真",
-            "愿所有烦恼都消失",
-            "记得吃水果",
-            "保持好心情",
-            "顺顺利利"
+            "猛攻"
         ];
 
         // 弹窗背景颜色
@@ -107,7 +93,7 @@
 
         function createPopups() {
             // 生成多个弹窗
-            const count = 50; // 可调整数量
+            const count = 500; // 可调整数量
             for (let i = 0; i < count; i++) {
                 setTimeout(createPopup, i * 100);
             }
