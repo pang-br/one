@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹窗</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            overflow: hidden;
+        }
+        .popup {
+            position: absolute;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            font-family: "微软雅黑", sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .popup:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+        button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 9999;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="createPopups()">生成思念弹窗</button>
+
+    <script>
+        // 温馨提示内容
+        const tips = [
+            "每天都要元气满满",
+            "保持微笑呀",
+            "好好爱自己",
+            "我想你了",
+            "今天过得开心嘛",
+            "期待下一次见面",
+            "别熬夜",
+            "早点休息",
+            "天冷了，多穿衣服",
+            "多喝水哦~",
+            "梦想成真",
+            "愿所有烦恼都消失",
+            "记得吃水果",
+            "保持好心情",
+            "顺顺利利"
+        ];
+
+        // 弹窗背景颜色
+        const bgColors = [
+            "#ff6b6b", "#4ecdc4", "#45b7d1", "#a29bfe", "#fd79a8",
+            "#00b894", "#feca57", "#ffeaa7", "#fab1a0", "#55efc4",
+            "#74b9ff", "#a29bfe", "#fdcb6e", "#e17055", "#00cec9"
+        ];
+
+        function createPopup() {
+            const popup = document.createElement("div");
+            popup.className = "popup";
+            
+            // 随机选择提示和颜色
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            const randomColor = bgColors[Math.floor(Math.random() * bgColors.length)];
+            
+            popup.textContent = randomTip;
+            popup.style.backgroundColor = randomColor;
+            
+            // 随机位置
+            const maxX = window.innerWidth - 150;
+            const maxY = window.innerHeight - 80;
+            popup.style.left = `${Math.random() * maxX}px`;
+            popup.style.top = `${Math.random() * maxY}px`;
+            
+            // 随机大小
+            const fontSize = 14 + Math.random() * 8;
+            popup.style.fontSize = `${fontSize}px`;
+            
+            document.body.appendChild(popup);
+
+            // 点击弹窗可关闭
+            popup.onclick = function() {
+                this.style.opacity = "0";
+                setTimeout(() => {
+                    this.remove();
+                }, 300);
+            };
+        }
+
+        function createPopups() {
+            // 生成多个弹窗
+            const count = 50; // 可调整数量
+            for (let i = 0; i < count; i++) {
+                setTimeout(createPopup, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
