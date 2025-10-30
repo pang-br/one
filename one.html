@@ -19,7 +19,15 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             font-family: "微软雅黑", sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
+            /* 新增：弹出动画的初始状态 */
+            opacity: 0;
+            transform: scale(0.8) translate(0, 20px);
+            transition: all 0.5s ease;
+        }
+        /* 新增：弹窗显示后的状态（动画结束） */
+        .popup.show {
+            opacity: 1;
+            transform: scale(1) translate(0, 0);
         }
         .popup:hover {
             transform: scale(1.05);
@@ -44,7 +52,7 @@
     </style>
 </head>
 <body>
-    <button onclick="createPopups()">生成弹窗</button>
+    <button onclick="createPopups()">重新生成弹窗</button>
 
     <script>
         // 温馨提示内容
@@ -81,10 +89,15 @@
             popup.style.fontSize = `${fontSize}px`;
             
             document.body.appendChild(popup);
+            // 延迟添加show类，触发弹出动画
+            setTimeout(() => {
+                popup.classList.add("show");
+            }, 10);
 
             // 点击弹窗可关闭
             popup.onclick = function() {
                 this.style.opacity = "0";
+                this.style.transform = "scale(0.8)";
                 setTimeout(() => {
                     this.remove();
                 }, 300);
@@ -98,6 +111,11 @@
                 setTimeout(createPopup, i * 100);
             }
         }
+
+        // 新增：页面加载完成后自动生成弹窗
+        window.onload = function() {
+            createPopups();
+        };
     </script>
 </body>
 </html>
